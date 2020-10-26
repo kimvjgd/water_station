@@ -85,20 +85,20 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-        body: Padding(
+      body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             _buildBody(),
-                Hero(
-                  tag: 'logo',
-                  child: Container(
-                    child: Image.asset('images/logo.png'),
-                    height: 200.0,
-                  ),
-                ),
+            Hero(
+              tag: 'logo',
+              child: Container(
+                child: Image.asset('images/logo.png'),
+                height: 200.0,
+              ),
+            ),
             RoundedButton(title: '비회원 임시 익명 로그인', colour:Colors.red.shade900 , onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context)=> MainPage()));
             },),
@@ -110,9 +110,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               onPressed: () => googleSignIn().whenComplete(() {
                 user.initData();
                 if(data_investor[index_person]['email'] == email){
-                Navigator.pushReplacement(context, MaterialPageRoute(
-                  builder: (context) => MainPage()
-                ));} else{
+                  Navigator.pushReplacement(context, MaterialPageRoute(
+                      builder: (context) => MainPage()
+                  ));} else{
                   Navigator.pushReplacement(context, MaterialPageRoute(
                       builder: (context) => Identification()
                   ));

@@ -102,33 +102,33 @@ class _TabPageState extends State<TabPage> {
         toolbarHeight: 70,
         backgroundColor: Colors.white,
         actions: [
-        FlatButton(
-                color: Colors.white,
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  _googleSignIn.signOut();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => WelcomeScreen()));
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.exit_to_app,color: Colors.black,),
-                    Text('Log_Out')
-                  ],
-                ),
-              )
+          FlatButton(
+            color: Colors.white,
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              _googleSignIn.signOut();
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => WelcomeScreen()));
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.exit_to_app,color: Colors.black,),
+                Text('Log_Out')
+              ],
+            ),
+          )
         ],
         title: StreamBuilder(
-        stream: Firestore.instance.collection('person').snapshots(),
+          stream: Firestore.instance.collection('person').snapshots(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
               return Center(child: CircularProgressIndicator());
               // 아마 비회원으로 들어오면 여기가 계속 돌아갈 것이다. 나중에 고쳐줄것
             } else {
               var items =
-                  // ignore: deprecated_member_use
-                  snapshot.data.documents ?? []; // 내용이 없어도 null이 안되고 []공백이된다..
+              // ignore: deprecated_member_use
+              snapshot.data.documents ?? []; // 내용이 없어도 null이 안되고 []공백이된다..
               List_Length = items.length;
               data_investor = items;
 
@@ -171,4 +171,3 @@ class _TabPageState extends State<TabPage> {
     }
   }
 }
-

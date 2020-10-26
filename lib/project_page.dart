@@ -109,7 +109,7 @@ class _ProjectPageState extends State<ProjectPage> {
                 children: [
                   Text('• 위치 : 충청남도 태안군 소원면 영전 1리'),
                   Text('• 최대 집수량 : 150 톤'),
-                  Text('• 집수 면적 : 300㎡m⁶'),
+                  Text('• 집수 면적 : 300㎡'),
                   Text('* 기간 동안 목표 집수량 미달성 시 다음 프로젝트로 어쨋든 넘어감@@@ 나중에 고쳐야함'),
                 ],
               ),
@@ -120,16 +120,48 @@ class _ProjectPageState extends State<ProjectPage> {
             ),
             Accumulation(), // graph
 
-            // 왼쪽으로
-            Column(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 100,
+                decoration: BoxDecoration(
 
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('1차 목표 집수량 120톤'),
-                Text('기간 : 2020년 12월 1일 ~ 2021년 4월 30일'),
-                Text('투자 기간 : 11월 30일까지'),
-                Text('* 기간 동안 목표 집수량 미달성 시 다음 프로젝트로 어쨋든 넘어감@@@ 나중에 고쳐야함'),
-              ],
+                  border: Border(
+
+                    left: BorderSide(
+                      color: Colors.black,
+                      width: 3,
+                    ),
+                    right: BorderSide(
+                      color: Colors.black,
+                      width: 3,
+                    ),
+                    top: BorderSide(
+                      color: Colors.black,
+                      width: 2,
+                    )
+
+                  )
+                ),
+              ),
+            ),
+
+
+            // 왼쪽으로
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                color: Colors.transparent,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('1차 목표 집수량 120톤'),
+                    Text('기간 : 2020년 12월 1일 ~ 2021년 4월 30일'),
+                    Text('투자 기간 : 11월 30일까지'),
+                    Text('* 기간 동안 목표 집수량 미달성 시 다음 프로젝트로 어쨋든 넘어감@@@ 나중에 고쳐야함'),
+                  ],
+                ),
+              ),
             ),
 
             SizedBox(
@@ -207,13 +239,16 @@ class _ProjectPageState extends State<ProjectPage> {
             SingleChildScrollView(
               child: Row(
                 children: [
-                  Expanded(child: _buildImage('project_1', 300, 150)),      // 여기의 height가 간격을 좌우한다.
+                  Expanded(child: _buildImage('project_1', 300, 150)),
+                  // 여기의 height가 간격을 좌우한다.
                   Expanded(child: _buildImage('project_2', 300, 150)),
                 ],
               ),
             ),
 
-            SizedBox(height: 30,),
+            SizedBox(
+              height: 30,
+            ),
 
             Text(
               '시공 후',
@@ -343,3 +378,6 @@ Widget _buildImage(String assetName, double image_width, double image_height) {
 // 일단 그냥 들고 오는지 부터 확인을 해봐야하는데..
 // 만약 그냥 들고온다면 딱히 필요가 없고 근데  통신에 따라 어떻게 들고 오는지 다르지 않나? 흠..
 // 일단 한번 해보자.
+
+
+

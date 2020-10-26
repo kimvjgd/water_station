@@ -3,11 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:math';
 
 int List_Length = 0;
 dynamic data_investor = [];
 int total_investment = 0;
-int index_person;
+int _index_person;
+String percent;
+double temp;
 
 // @@@@@@@@@@@@@@@@@@ 실시간 업뎃은 dongstagram clone _ 1 searchPage _buildbody를 참조하면 될꺼같다.
 
@@ -35,7 +38,7 @@ class _InvestmentPageState extends State<InvestmentPage> {
           child: Column(
             children: [
               Text(
-                  '${user.userInfo[index_person].name}의 투자금액은 ${user.userInfo[index_person].invest_amount}'),
+                  '${data_investor[_index_person]['name']}의 투자금액은 ${data_investor[_index_person]['invest_amount']} 비율 % : ${percent}%'),
               Text(
                 '총 누적 투자 금액',
                 textAlign: TextAlign.center,
@@ -179,20 +182,23 @@ class User {
         _userInfo.add(UserInfo(
           data_investor[i]['name'],
           data_investor[i]['invest_amount'],
+          data_investor[i]['recover_amount'],
           data_investor[i]['invest_date'],
           data_investor[i]['description'],
           data_investor[i]['email'],
         ));
       }
-        // if(data_investor[i]['invest_amount']!=0){
-        //   print(data_investor[i]['name']);
-        // }
-        total_investment += data_investor[i]['invest_amount'];
-        if (data_investor[i]['email'] == email) {
-          index_person = i;
-    }
+      // if(data_investor[i]['invest_amount']!=0){
+      //   print(data_investor[i]['name']);
+      // }
+      total_investment += data_investor[i]['invest_amount'];
+      if (data_investor[i]['email'] == email) {
+        _index_person = i;
       }
-      print('${user.userInfo.length}::user.userInfo.length');
+    }
+    temp = (data_investor[_index_person]['invest_amount']/total_investment*100);
+    percent = temp.toStringAsFixed(1);
+    print('${percent}%%%');
   }
 
   List<UserInfo> get userInfo => _userInfo;
@@ -215,10 +221,11 @@ class User {
 class UserInfo {
   String name;
   int invest_amount;
+  int recover_amount;
   String invest_date;
   String description;
   String email;
 
-  UserInfo(this.name, this.invest_amount, this.invest_date, this.description,
+  UserInfo(this.name, this.invest_amount, this.recover_amount, this.invest_date, this.description,
       this.email);
 }
